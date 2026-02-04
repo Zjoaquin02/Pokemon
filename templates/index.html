@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ nombre }} | Pokémon Aleatorio</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+    <h1>🎮 Pokémon Aleatorio</h1>
+
+    <div class="pokemon-img">
+        <img src="{{ imagen_url }}" alt="Pokemon">
+    </div>
+
+    <div class="name">{{ nombre }}</div>
+
+    <div class="badges">
+        {% for tipo in tipos %}
+            <div class="badge">{{ tipo }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="info">
+        <strong>Generación:</strong> {{ generacion }}
+    </div>
+
+    <div class="stats-box">
+        <div class="stat">
+            <div class="stat-label">📏 Altura</div>
+            <div class="stat-value">{{ altura }} m</div>
+        </div>
+        <div class="stat">
+            <div class="stat-label">⚖️ Peso</div>
+            <div class="stat-value">{{ peso }} kg</div>
+        </div>
+    </div>
+
+
+    {% if es_paradoja %}
+        <div class="info" style="color:#b31217;">
+            🔮 <strong>Forma Paradoja</strong><br>
+            Relacionado con {{ pokemon_base.capitalize() if pokemon_base else "otro Pokémon" }}
+        </div>
+    {% endif %}
+
+    <div class="info" title="Las megaevoluciones no son evoluciones permanentes">
+        <strong>Mega evolución:</strong>
+        {% if mega_disponible %} ✅ {% else %} ❌ {% endif %}
+    </div>
+
+
+    <div class="evo-tree">
+        <h3>Cadena evolutiva</h3>
+
+        {% for origen, ramas in evoluciones_por_origen.items() %}
+            <div class="evo-node">
+
+                {% if loop.first %}
+                    <div class="pokemon-box">
+                        {{ origen.capitalize() }}
+                    </div>
+                {% endif %}
+
+                {% if ramas|length > 1 %}
+                    <div class="evo-children">
+                        {% for evo in ramas %}
+                            <div class="pokemon-box child">
+                                {{ evo.to.capitalize() }}
+
+                                {% if evo.condiciones %}
+                                    <div class="cond">
+                                        {% for c in evo.condiciones %}
+                                            <span class="cond-label">{{ c }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {% for evo in ramas %}
+                        <div class="evo-lineal">
+                            ↓
+                            <div class="pokemon-box child">
+                                {{ evo.to.capitalize() }}
+
+                                {% if evo.condiciones %}
+                                    <div class="cond">
+                                        {% for c in evo.condiciones %}
+                                            <span class="cond-label">{{ c }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="get">
+        <button>🎲 Nuevo Pokémon</button>
+    </form>
+
+    <div style="margin-top:12px; font-size:0.7rem; color:#999;">
+    Datos vía PokeAPI
+    </div>
+
+</div>
+
+</body>
+</html>
