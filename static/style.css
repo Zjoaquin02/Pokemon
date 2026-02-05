@@ -334,3 +334,32 @@ body.dark #theme-toggle {
     background: #333;
     color: #fff;
 }
+
+#modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#modal-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    min-width: 220px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
+    animation: fadeIn .2s ease;
+}
+
+#modal-card img {
+    width: 160px;
+}
+
+body.dark #modal-card {
+    background: #222;
+    color: #fff;
+}
