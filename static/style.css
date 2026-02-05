@@ -1,8 +1,10 @@
 
 /* =======================================================
-   POKEMON RANDOMIZER - CLEAN & ORDERED CSS
-   - Type colors always visible (light & dark)
-   - Improved contrast and readability
+   POKEMON RANDOMIZER - CLEAN & FIXED CSS
+   Fixes:
+   - Theme toggle back to circular button on the side
+   - Full page background changes in dark mode
+   - Info labels readable (white) in dark mode
 ======================================================= */
 
 /* ===================== VARIABLES ===================== */
@@ -24,7 +26,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color .35s ease;
+    transition: background-color .35s ease, background .35s ease;
 }
 
 /* ===================== CARD ===================== */
@@ -105,6 +107,7 @@ body {
 .info {
     margin: 10px 0;
     color: #555;
+    font-weight: 600;
 }
 
 /* ===================== STATS ===================== */
@@ -189,9 +192,27 @@ body {
     position: relative;
 }
 
+/* Theme toggle restored as circular side button */
 #theme-toggle {
     position: absolute;
     right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f2f2f2;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+}
+
+#theme-toggle:hover {
+    transform: translateY(-50%) scale(1.1);
 }
 
 /* ===================== BUTTON ===================== */
@@ -227,7 +248,7 @@ button {
 
 /* ===================== DARK MODE ===================== */
 html.dark body {
-    background-color: #121212;
+    background: #121212;
 }
 
 html.dark .card {
@@ -241,11 +262,25 @@ html.dark .stat {
     color: #f2f2f2;
 }
 
-/* IMPORTANT:
-   Do NOT override type colors in dark mode */
+/* Info text readable in dark mode */
+html.dark .info,
+html.dark .stat-label {
+    color: #ffffff;
+}
+
+html.dark .stat-value {
+    color: #ffffff;
+}
+
+/* Do NOT override Pokémon type colors */
 html.dark .badge:not([class*="type-"]) {
     background: #3a3a3a;
     color: #eee;
+}
+
+html.dark #theme-toggle {
+    background: #333;
+    color: #fff;
 }
 
 html.dark .name,
