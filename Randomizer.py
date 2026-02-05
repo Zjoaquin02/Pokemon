@@ -113,6 +113,7 @@ def index():
     gen_romano = gen_raw.split("-")[1].upper()
     generacion = gen_romano
     mega_disponible = tiene_mega(especie)
+    es_legendario = especie.get("is_legendary", False)
     es_paradoja = es_pokemon_paradoja(nombre, generacion)
 
     pokemon_base = None
@@ -139,9 +140,11 @@ def index():
         es_paradoja=es_paradoja,
         pokemon_base=pokemon_base,
         mega_disponible=mega_disponible,
+        es_legendario=es_legendario,
         altura=altura,
         peso=peso
     )
+
 
 
 import os
