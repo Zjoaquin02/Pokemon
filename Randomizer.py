@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import random
 
@@ -81,7 +81,21 @@ PARADOJAS_BASE = {
 }
 
 
-def obtener_pokemon_aleatorio():
+LEGENDARY_IDS = [
+    144, 145, 146, 150,  # Gen 1
+    243, 244, 245, 249, 250,  # Gen 2
+    377, 378, 379, 380, 381, 382, 383, 384,  # Gen 3
+    480, 481, 482, 483, 484, 485, 486, 487, 488,  # Gen 4
+    638, 639, 640, 641, 642, 643, 644, 645, 646,  # Gen 5
+    716, 717, 718,  # Gen 6
+    785, 786, 787, 788, 789, 790, 791, 792, 800,  # Gen 7
+    888, 889, 890, 891, 892, 898,  # Gen 8
+    1001, 1002, 1003, 1004, 1007, 1008  # Gen 9
+]
+
+def obtener_pokemon_aleatorio(solo_legendarios=False):
+    if solo_legendarios:
+        return random.choice(LEGENDARY_IDS)
     return random.randint(1, 1010)
 
 def obtener_datos_pokemon(pokemon_id):
@@ -117,7 +131,12 @@ def recorrer_evoluciones(chain, lista, previo=None):
 
 @app.route("/")
 def index():
-    pokemon_id = obtener_pokemon_aleatorio()
+    # Si no hay parámetro "started", mostramos bienvenida
+    if not request.args.get("started"):
+        return render_template("index.html", welcome_mode=True)
+
+    legendary_filter = request.args.get("legendary")  # "1" o None
+    pokemon_id = obtener_pokemon_aleatorio(solo_legendarios=(legendary_filter == "1"))
     pokemon = obtener_datos_pokemon(pokemon_id)
 
     nombre = pokemon["name"].capitalize()
@@ -152,6 +171,7 @@ def index():
 
     return render_template(
         "index.html",
+        welcome_mode=False,  # No es bienvenida, es contenido
         nombre=nombre,
         tipos=tipos,
         imagen_url=imagen_url,
@@ -162,10 +182,9 @@ def index():
         mega_disponible=mega_disponible,
         es_legendario=es_legendario,
         altura=altura,
-        peso=peso
+        peso=peso,
+        legendary_filter=legendary_filter
     )
-
-
 
 import os
 

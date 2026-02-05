@@ -312,7 +312,8 @@ html.dark #theme-toggle {
 }
 
 html.dark .name,
-html.dark h1 {
+html.dark h1,
+html.dark .welcome-box {
     color: #e6e6e6;
 }
 

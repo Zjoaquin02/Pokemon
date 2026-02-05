@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
 
     <!-- Evita flash blanco al cargar -->
     <script>
-    (function () {
-        const theme = localStorage.getItem("theme");
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-        }
-    })();
+        (function () {
+            const theme = localStorage.getItem("theme");
+            if (theme === "dark") {
+                document.documentElement.classList.add("dark");
+            }
+        })();
     </script>
 
     <title>{{ nombre }} | Pokémon Aleatorio</title>
@@ -22,120 +23,145 @@
 
 <body>
 
-<div class="card">
+    <div class="card">
 
- <!-- HAMBURGER MENU -->
-    <div class="menu-container">
-        <button id="menu-btn" aria-label="Abrir menú">☰</button>
+        <!-- HAMBURGER MENU -->
+        <div class="menu-container">
+            <button id="menu-btn" aria-label="Abrir menú">☰</button>
 
-        <div id="side-menu" class="side-menu">
-            <h3>Filtros</h3>
+            <div id="side-menu" class="side-menu">
+                <h3>Filtros</h3>
 
-            <label>
-                <input type="checkbox" id="filter-legendary">
-                Solo legendarios
-            </label>
+                <label>
+                    <input type="checkbox" id="filter-legendary">
+                    Solo legendarios
+                </label>
 
-            <div class="menu-actions">
-                <button id="apply-filters">Aplicar filtros</button>
-                <button id="clear-filters">Limpiar</button>
+                <div class="menu-actions">
+                    <button id="apply-filters">Aplicar filtros</button>
+                    <button id="clear-filters">Limpiar</button>
+                </div>
+
+                <hr>
+
+                <button id="toggle-dark">🌙 OCASO</button>
             </div>
-
-            <hr>
-
-            <button id="toggle-dark">🌙 Modo oscuro</button>
         </div>
-    </div>
 
-    <div class="header">
-        <h1>🎮 Pokémon Aleatorio</h1>
-    </div>
+        <div class="header">
+            <h1>🎮 Pokémon Aleatorio</h1>
+        </div>
 
-    <div class="pokemon-img">
-        <img src="{{ imagen_url }}" alt="Pokemon">
-    </div>
+        {% if welcome_mode %}
+        <div class="welcome-box" style="text-align: center; padding: 2rem;">
+            <h2>Welcome Pokémon Randomizer</h2>
+            <p>Descubre nuevas criaturas y explora sus evoluciones.</p>
 
-    <div class="name {% if es_legendario %}legendary{% endif %}">
-        {{ nombre }}
-    </div>
+            <form method="get">
+                <input type="hidden" name="started" value="1">
+                {% if legendary_filter == "1" %}
+                <input type="hidden" name="legendary" value="1">
+                {% endif %}
+                <button style="margin-top: 1rem; font-size: 1.2rem; padding: 10px 20px;">
+                    🚀 Comenzar
+                </button>
+            </form>
+        </div>
+        {% else %}
 
-    <div class="badges">
-        {% for tipo in tipos %}
+        <div class="pokemon-img">
+            <img src="{{ imagen_url }}" alt="Pokemon">
+        </div>
+
+        <div class="name {% if es_legendario %}legendary{% endif %}">
+            {{ nombre }}
+        </div>
+
+        <div class="badges">
+            {% for tipo in tipos %}
             <div class="badge type-{{ tipo }}">{{ tipo }}</div>
-        {% endfor %}
-    </div>
-
-    <div class="info">
-        <strong>Generación:</strong> {{ generacion }}
-    </div>
-
-    <div class="stats-box">
-        <div class="stat">
-            <div class="stat-label">📏 Altura</div>
-            <div class="stat-value">{{ altura }} m</div>
+            {% endfor %}
         </div>
-        <div class="stat">
-            <div class="stat-label">⚖️ Peso</div>
-            <div class="stat-value">{{ peso }} kg</div>
+
+        <div class="info">
+            <strong>Generación:</strong> {{ generacion }}
         </div>
-    </div>
 
-    <div class="info">
-        <strong>Mega evolución:</strong>
-        {% if mega_disponible %} ✅ {% else %} ❌ {% endif %}
-    </div>
-
-    <div class="info">
-        <strong>Legendario:</strong>
-        {% if es_legendario %} ✅ {% else %} ❌ {% endif %}
-    </div>
-
-    <div class="evo-tree">
-        <h3>Cadena evolutiva</h3>
-
-        {% for origen, ramas in evoluciones_por_origen.items() %}
-        <div class="evo-node">
-
-            {% if loop.first %}
-            <div class="pokemon-box evo-click" data-name="{{ origen }}">
-                {{ origen.capitalize() }}
+        <div class="stats-box">
+            <div class="stat">
+                <div class="stat-label">📏 Altura</div>
+                <div class="stat-value">{{ altura }} m</div>
             </div>
-            {% endif %}
+            <div class="stat">
+                <div class="stat-label">⚖️ Peso</div>
+                <div class="stat-value">{{ peso }} kg</div>
+            </div>
+        </div>
 
-            {% for evo in ramas %}
-            <div class="evo-lineal">
-                <div class="pokemon-box child evo-click" data-name="{{ evo.to }}">
-                    {{ evo.to.capitalize() }}
+        <div class="info">
+            <strong>Mega evolución:</strong>
+            {% if mega_disponible %} ✅ {% else %} ❌ {% endif %}
+        </div>
 
-                    {% if evo.condiciones %}
+        <div class="info">
+            <strong>Legendario:</strong>
+            {% if es_legendario %} ✅ {% else %} ❌ {% endif %}
+        </div>
+
+        <div class="evo-tree">
+            <h3>Cadena evolutiva</h3>
+
+            {% for origen, ramas in evoluciones_por_origen.items() %}
+            <div class="evo-node">
+
+                {% if loop.first %}
+                <div class="pokemon-box evo-click" data-name="{{ origen }}">
+                    {{ origen.capitalize() }}
+                </div>
+                {% endif %}
+
+                {% for evo in ramas %}
+                <div class="evo-lineal">
+                    <div class="pokemon-box child evo-click" data-name="{{ evo.to }}">
+                        {{ evo.to.capitalize() }}
+
+                        {% if evo.condiciones %}
                         <div class="evo-conditions">
                             {% for c in evo.condiciones %}
-                                <div class="condition">{{ c }}</div>
+                            <div class="condition">{{ c }}</div>
                             {% endfor %}
                         </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
+                {% endfor %}
+
             </div>
             {% endfor %}
-
         </div>
-        {% endfor %}
+
+        <form method="get">
+            <input type="hidden" name="started" value="1">
+            {% if legendary_filter == "1" %}
+            <input type="hidden" name="legendary" value="1">
+            {% endif %}
+            <button>🎲 Nuevo Pokémon</button>
+        </form>
+
+        {% endif %}
+
     </div>
 
-    <form method="get">
-        <button>🎲 Nuevo Pokémon</button>
-    </form>
-</div>
-
-<div id="modal-bg">
-    <div id="modal-card">
-        <img id="modal-img" src="">
-        <h3 id="modal-name"></h3>
+    <div id="modal-bg">
+        <div id="modal-card">
+            <img id="modal-img" src="">
+            <h3 id="modal-name"></h3>
+        </div>
     </div>
-</div>
 
-<!-- JS externo -->
-<script src="{{ url_for('static', filename='menu.js') }}"></script>
-<script src="{{ url_for('static', filename='main.js') }}"></script>
+    <!-- JS externo -->
+    <script src="{{ url_for('static', filename='menu.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
+
 </html>
