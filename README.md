@@ -59,21 +59,22 @@ python -m pip show flask
 
 python -m pip show pyinstaller
 
-====================
+🔹
 git checkout main
 git pull origin main
-# trabajo
+-- trabajo
 git add .
 git commit -m "Cambios desde otra PC"
 git push
-====================
+🔹
 
 Estructura:
-pokemon_app/
+Pokemon_Aleatorio/
 │
 ├── Randomizer.py
 ├── templates/
 │   └── index.html
-├── static/
-│   ├── style.css
-│   └── favicon.ico
+└── static/
+    ├── style.css
+    ├── main.js
+    └── favicon.ico
