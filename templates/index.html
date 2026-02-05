@@ -2,20 +2,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+
+    <script>
+    (function () {
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+        }
+    })();
+    </script>
+
     <title>{{ nombre }} | Pokémon Aleatorio</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
 <div class="card">
-    <h1>🎮 Pokémon Aleatorio</h1>
+    <div class="header">
+        <h1>🎮 Pokémon Aleatorio</h1>
+        <button id="theme-toggle" title="Cambiar modo">🌙</button>
+    </div>
 
     <div class="pokemon-img">
         <img src="{{ imagen_url }}" alt="Pokemon">
     </div>
 
-    <div class="name">{{ nombre }}</div>
+    <div class="name {% if es_legendario %}legendary{% endif %}">{{ nombre }}</div>
 
     <div class="badges">
         {% for tipo in tipos %}
@@ -38,19 +52,15 @@
         </div>
     </div>
 
-
-    {% if es_paradoja %}
-        <div class="info" style="color:#b31217;">
-            🔮 <strong>Forma Paradoja</strong><br>
-            Relacionado con {{ pokemon_base.capitalize() if pokemon_base else "otro Pokémon" }}
-        </div>
-    {% endif %}
-
-    <div class="info" title="Las megaevoluciones no son evoluciones permanentes">
+    <div class="info">
         <strong>Mega evolución:</strong>
         {% if mega_disponible %} ✅ {% else %} ❌ {% endif %}
     </div>
 
+    <div class="info">
+        <strong>Legendario:</strong>
+        {% if es_legendario %} ✅ {% else %} ❌ {% endif %}
+    </div>
 
     <div class="evo-tree">
         <h3>Cadena evolutiva</h3>
@@ -59,45 +69,18 @@
             <div class="evo-node">
 
                 {% if loop.first %}
-                    <div class="pokemon-box">
+                    <div class="pokemon-box evo-click" data-name="{{ origen }}">
                         {{ origen.capitalize() }}
                     </div>
                 {% endif %}
 
-                {% if ramas|length > 1 %}
-                    <div class="evo-children">
-                        {% for evo in ramas %}
-                            <div class="pokemon-box child">
-                                {{ evo.to.capitalize() }}
-
-                                {% if evo.condiciones %}
-                                    <div class="cond">
-                                        {% for c in evo.condiciones %}
-                                            <span class="cond-label">{{ c }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {% for evo in ramas %}
-                        <div class="evo-lineal">
-                            ↓
-                            <div class="pokemon-box child">
-                                {{ evo.to.capitalize() }}
-
-                                {% if evo.condiciones %}
-                                    <div class="cond">
-                                        {% for c in evo.condiciones %}
-                                            <span class="cond-label">{{ c }}</span>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                            </div>
+                {% for evo in ramas %}
+                    <div class="evo-lineal">
+                        <div class="pokemon-box child evo-click" data-name="{{ evo.to }}">
+                            {{ evo.to.capitalize() }}
                         </div>
-                    {% endfor %}
-                {% endif %}
+                    </div>
+                {% endfor %}
 
             </div>
         {% endfor %}
@@ -106,17 +89,55 @@
     <form method="get">
         <button>🎲 Nuevo Pokémon</button>
     </form>
-
-<div style="margin-top:12px; font-size:0.7rem; color:#999; line-height:1.4;">
-    Datos vía PokeAPI<br>
-    📩 Contacto: 
-    <a href="mailto:zjoaquin02@gmail.com" style="color:#999; text-decoration:none;">
-        zjoaquin02@gmail.com
-    </a>
 </div>
 
-
+<div id="modal-bg">
+    <div id="modal-card">
+        <img id="modal-img" src="">
+        <h3 id="modal-name"></h3>
+    </div>
 </div>
+
+<script>
+const toggleBtn = document.getElementById("theme-toggle");
+const body = document.body;
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark");
+    toggleBtn.textContent = "☀️";
+}
+
+toggleBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    const isDark = document.documentElement.classList.contains("dark");
+    toggleBtn.textContent = isDark ? "☀️" : "🌙";
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+});
+
+document.addEventListener("click", async (e) => {
+    const box = e.target.closest(".evo-click");
+    if (!box) return;
+
+    const name = box.dataset.name.toLowerCase();
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    const data = await res.json();
+
+    document.getElementById("modal-img").src =
+        data.sprites.other["official-artwork"].front_default;
+
+    document.getElementById("modal-name").textContent =
+        name.charAt(0).toUpperCase() + name.slice(1);
+
+    document.getElementById("modal-bg").style.display = "flex";
+});
+
+document.getElementById("modal-bg").addEventListener("click", e => {
+    if (e.target.id === "modal-bg") {
+        e.currentTarget.style.display = "none";
+    }
+});
+</script>
 
 </body>
 </html>

@@ -1,7 +1,19 @@
+
+/* =======================================================
+   POKEMON RANDOMIZER - CLEAN CSS
+======================================================= */
+
+/* ===================== VARIABLES ===================== */
+:root {
+    --gold: #d4af37;
+}
+
+/* ===================== RESET ===================== */
 * {
     box-sizing: border-box;
 }
 
+/* ===================== BASE ===================== */
 body {
     margin: 0;
     min-height: 100vh;
@@ -10,8 +22,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color .35s ease;
+    will-change: background-color;
 }
 
+/* ===================== CARD ===================== */
 .card {
     background: #ffffff;
     width: 360px;
@@ -20,6 +35,7 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.35);
     text-align: center;
     animation: fadeIn 0.6s ease;
+    backface-visibility: hidden;
 }
 
 .card h1 {
@@ -28,6 +44,13 @@ body {
     color: #333;
 }
 
+.name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* ===================== IMAGE ===================== */
 .pokemon-img {
     margin: 20px 0;
 }
@@ -41,12 +64,7 @@ body {
     transform: scale(1.08);
 }
 
-.name {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
+/* ===================== BADGES ===================== */
 .badges {
     display: flex;
     justify-content: center;
@@ -62,139 +80,13 @@ body {
     font-weight: bold;
 }
 
+/* ===================== INFO ===================== */
 .info {
     margin: 10px 0;
     color: #555;
 }
 
-.evos {
-    margin-top: 15px;
-    text-align: left;
-}
-
-.evos h3 {
-    margin-bottom: 6px;
-}
-
-.evos ul {
-    padding-left: 20px;
-}
-
-button {
-    margin-top: 15px;
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #e298ff;
-    color: #0f0f0f;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-.evo-tree {
-    margin-top: 20px;
-}
-
-.evo-node {
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-.pokemon-box {
-    display: inline-block;
-    padding: 10px 16px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    background: #f9f9f9;
-    font-weight: bold;
-    min-width: 120px;
-}
-
-.evo-children {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 15px;
-}
-
-.child {
-    font-weight: normal;
-}
-
-.cond {
-    margin-top: 4px;
-}
-
-.cond-label {
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: #ff0011;
-    background: #ffecec;
-    padding: 2px 6px;
-    border-radius: 6px;
-}
-
-
-.evo-lineal {
-    margin-top: 10px;
-}
-
-.evo-tree {
-    margin-top: 15px;
-}
-
-.pokemon-box {
-    background: #f9f9f9;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 6px auto;
-    width: fit-content;
-    font-weight: bold;
-}
-
-.evo-lineal {
-    margin: 10px 0;
-}
-
-.evo-children {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.pokemon-box.child {
-    background: #ffffff;
-}
-
-.cond {
-    margin-top: 6px;
-}
-
-.cond-label {
-    display: inline-block;
-    background: #ece7ff;
-    color: #4b3cc4;
-    font-size: 0.8em;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 8px;
-}
-
+/* ===================== STATS ===================== */
 .stats-box {
     display: flex;
     justify-content: space-between;
@@ -222,14 +114,210 @@ button:hover {
     color: #333;
 }
 
-button {
-    cursor: pointer;
+/* ===================== EVOLUTIONS ===================== */
+.evo-tree {
+    margin-top: 15px;
+}
+
+.evo-node {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.evo-lineal {
+    margin: 10px 0;
+}
+
+.evo-children {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .pokemon-box {
+    display: inline-block;
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin: 6px auto;
+    width: fit-content;
+    font-weight: bold;
+    min-width: 120px;
     transition: transform 0.15s ease;
 }
 
 .pokemon-box:hover {
     transform: translateY(-2px);
+}
+
+.evo-click {
+    cursor: pointer;
+}
+
+/* ===================== HEADER ===================== */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#theme-toggle {
+    position: absolute;
+    right: 0;
+}
+
+/* ===================== BUTTONS ===================== */
+button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #e298ff;
+    color: #0f0f0f;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* ===================== TOGGLE ===================== */
+#theme-toggle {
+    background: #f2f2f2;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+    transition: background .2s, transform .2s;
+}
+
+#theme-toggle:hover {
+    background: #e0e0e0;
+    transform: scale(1.1);
+}
+
+/* ===================== MODAL ===================== */
+#modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#modal-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    min-width: 220px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
+    animation: fadeIn .2s ease;
+}
+
+#modal-card img {
+    width: 160px;
+}
+
+/* ===================== DARK MODE ===================== */
+html.dark body {
+    background-color: #121212;
+    background-image: none;
+    color: #e0e0e0;
+}
+
+html.dark .card {
+    background: #1e1e1e;
+    box-shadow: 0 0 10px #000;
+}
+
+html.dark .pokemon-box,
+html.dark .stat {
+    background: #2f2f2f;
+    border-color: #555;
+    color: #f2f2f2;
+}
+
+html.dark .badge {
+    background: #3a3a3a;
+    color: #eee;
+}
+
+html.dark .stat-label {
+    color: #bbb;
+}
+
+html.dark .stat-value {
+    color: #fff;
+}
+
+html.dark .cond-label {
+    background: #3b355f;
+    color: #ddd;
+}
+
+html.dark #theme-toggle {
+    background: #333;
+    color: #fff;
+}
+
+html.dark #modal-card {
+    background: #222;
+    color: #fff;
+}
+
+html.dark .name,
+html.dark h1 {
+    color: #e6e6e6;
+}
+
+/* ===================== EFFECTS ===================== */
+.legendary {
+    position: relative;
+    color: var(--gold);
+    text-shadow: 0 0 6px rgba(212,175,55,.6);
+    animation: legendaryPulse 2.5s ease-in-out infinite;
+}
+
+/* ===================== TRANSITIONS ===================== */
+body,
+.card,
+.pokemon-box,
+.badge,
+.stat,
+.info,
+.name {
+    transition: 
+        background-color .35s ease,
+        color .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes legendaryPulse {
+    0%   { text-shadow: 0 0 6px rgba(212,175,55,.4); transform: scale(1); }
+    50%  { text-shadow: 0 0 14px rgba(212,175,55,.9); transform: scale(1.03); }
+    100% { text-shadow: 0 0 6px rgba(212,175,55,.4); transform: scale(1); }
 }

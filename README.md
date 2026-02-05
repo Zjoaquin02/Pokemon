@@ -36,8 +36,9 @@ Build Command: pip install -r requirements.txt
 
 Start Command: python Randomizer.py
 
-🔹 5. PyInstaller — App de escritorio Verificar PyInstaller python -m PyInstaller --version
+🔹 5. PyInstaller — App de escritorio Verificar PyInstaller 
 
+python -m PyInstaller --version
 pip install pyinstaller
 
 🔹 5.1
