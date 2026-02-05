@@ -1,2 +1,60 @@
-flask
-requests
+🔹 1. Python / Pip (instalación de dependencias)
+python --version
+
+python -m pip install flask requests
+
+python -m pip install pywebview pyinstaller
+
+python -m pip install --upgrade pip
+
+🔹 2. Ejecutar la app Flask local
+python Randomizer.py
+
+🔹 3. Git (inicializar y subir a GitHub)
+git init
+
+git branch -M main
+
+git add .
+
+git commit -m "mensaje"
+
+git remote add origin https://github.com/Zjoaquin02/Pokemon.git
+
+git push -u origin main
+
+git status
+
+🔹 4. Render (deploy)
+
+(estos comandos no se ejecutan en terminal, pero los dejo como referencia)
+
+Build Command:
+pip install -r requirements.txt
+
+Start Command:
+python Randomizer.py
+
+🔹 5. PyInstaller — App de escritorio
+Verificar PyInstaller
+python -m PyInstaller --version
+
+Crear ejecutable (con Flask + assets)
+python -m PyInstaller --onefile --noconsole --add-data "templates;templates" --add-data "static;static" desktop_app.py
+
+🔹 6. Limpieza (opcional antes de recompilar exe)
+rmdir /s /q build
+
+rmdir /s /q dist
+
+del *.spec
+
+🔹 7. Verificar ruta actual (útil para PyInstaller)
+pwd
+
+🔹 8. Comandos útiles de diagnóstico
+pip list
+
+python -m pip show flask
+
+python -m pip show pyinstaller
