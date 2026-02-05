@@ -237,16 +237,36 @@ button {
 /* ---------- Header ---------- */
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
 }
+
+#theme-toggle {
+    position: absolute;
+    right: 0;
+}
+
 
 /* ---------- Toggle button ---------- */
 #theme-toggle {
-    background: none;
+    background: #f2f2f2;
     border: none;
-    font-size: 1.2rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.1rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+    transition: background .2s, transform .2s;
+}
+
+#theme-toggle:hover {
+    background: #e0e0e0;
+    transform: scale(1.1);
 }
 
 /* ---------- Dark mode ---------- */
@@ -275,4 +295,42 @@ body.dark .info {
 
 body.dark a {
     color: #bbb;
+}
+
+body.dark h1,
+body.dark .name {
+    color: #e6e6e6;
+}
+
+body.dark .badge {
+    background: #3a3a3a;
+    color: #eee;
+}
+
+body.dark .pokemon-box {
+    background: #2f2f2f;
+    border-color: #555;
+    color: #f2f2f2;
+}
+
+body.dark .stat {
+    background: #2f2f2f;
+}
+
+body.dark .stat-label {
+    color: #bbb;
+}
+
+body.dark .stat-value {
+    color: #fff;
+}
+
+body.dark .cond-label {
+    background: #3b355f;
+    color: #ddd;
+}
+
+body.dark #theme-toggle {
+    background: #333;
+    color: #fff;
 }
