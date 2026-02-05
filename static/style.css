@@ -367,3 +367,43 @@ body.dark #modal-card {
 .evo-click {
     cursor: pointer;
 }
+
+.legendary {
+    position: relative;
+    color: #d4af37;
+    text-shadow: 0 0 6px rgba(212,175,55,.6);
+    animation: legendaryPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes legendaryPulse {
+    0% {
+        text-shadow: 0 0 6px rgba(212,175,55,.4);
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 14px rgba(212,175,55,.9);
+        transform: scale(1.03);
+    }
+    100% {
+        text-shadow: 0 0 6px rgba(212,175,55,.4);
+        transform: scale(1);
+    }
+}
+
+body,
+.card,
+.pokemon-box,
+.badge,
+.stat,
+.info,
+.name {
+    transition: 
+        background-color .35s ease,
+        color .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+body {
+    transition: background .4s ease;
+}

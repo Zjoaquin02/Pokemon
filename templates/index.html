@@ -18,7 +18,7 @@
         <img src="{{ imagen_url }}" alt="Pokemon">
     </div>
 
-    <div class="name">{{ nombre }}</div>
+    <div class="name {% if es_legendario %}legendary{% endif %}">{{ nombre }}</div>
 
     <div class="badges">
         {% for tipo in tipos %}
