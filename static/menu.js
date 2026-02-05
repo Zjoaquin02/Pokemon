@@ -1,3 +1,4 @@
+console.log("menu.js cargado");
 
 // ===================== MENU LOGIC =====================
 const menuBtn = document.getElementById("menu-btn");
