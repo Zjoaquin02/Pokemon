@@ -272,69 +272,69 @@ button {
 }
 
 /* ---------- Dark mode ---------- */
-body.dark {
+html.dark body {
     background-color: #121212;
     background-image: none;
     color: #e0e0e0;
 }
 
 
-body.dark .card {
+html.dark body .card {
     background: #1e1e1e;
     box-shadow: 0 0 10px #000;
 }
 
-body.dark .pokemon-box {
+html.dark body .pokemon-box {
     background: #2a2a2a;
     color: #fff;
 }
 
-body.dark .stat {
+html.dark body .stat {
     background: #2a2a2a;
 }
 
-body.dark .info {
+html.dark body .info {
     color: #ddd;
 }
 
-body.dark a {
+html.dark body a {
     color: #bbb;
 }
 
-body.dark h1,
-body.dark .name {
+html.dark body h1,
+html.dark body .name {
     color: #e6e6e6;
 }
 
-body.dark .badge {
+html.dark body .badge {
     background: #3a3a3a;
     color: #eee;
 }
 
-body.dark .pokemon-box {
+html.dark body .pokemon-box {
     background: #2f2f2f;
     border-color: #555;
     color: #f2f2f2;
 }
 
-body.dark .stat {
+html.dark body .stat {
     background: #2f2f2f;
 }
 
-body.dark .stat-label {
+html.dark body .stat-label {
     color: #bbb;
 }
 
-body.dark .stat-value {
+html.dark body .stat-value {
     color: #fff;
 }
 
-body.dark .cond-label {
+html.dark body .cond-label {
     background: #3b355f;
     color: #ddd;
 }
 
-body.dark #theme-toggle {
+html.dark body #theme-toggle {
     background: #333;
     color: #fff;
 }
@@ -363,7 +363,7 @@ body.dark #theme-toggle {
     width: 160px;
 }
 
-body.dark #modal-card {
+html.dark body #modal-card {
     background: #222;
     color: #fff;
 }
@@ -408,7 +408,7 @@ body,
         border-color .35s ease;
 }
 
-body.dark .name.legendary {
+html.dark body .name.legendary {
     filter: drop-shadow(0 0 6px rgba(212,175,55,.9));
 }
 
