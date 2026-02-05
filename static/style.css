@@ -192,7 +192,7 @@ body {
     position: relative;
 }
 
-/* Theme toggle restored as circular side button */
+/* Theme toggle restored as circular side button 
 #theme-toggle {
     position: absolute;
     right: 0;
@@ -214,7 +214,7 @@ body {
 #theme-toggle:hover {
     transform: translateY(-50%) scale(1.1);
 }
-
+*/
 /* ===================== BUTTON ===================== */
 button {
     margin-top: 15px;

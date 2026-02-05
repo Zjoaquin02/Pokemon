@@ -16,14 +16,39 @@
     <title>{{ nombre }} | Pokémon Aleatorio</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='menu.css') }}">
+
 </head>
 
 <body>
 
 <div class="card">
+
+ <!-- HAMBURGER MENU -->
+    <div class="menu-container">
+        <button id="menu-btn" aria-label="Abrir menú">☰</button>
+
+        <div id="side-menu" class="side-menu">
+            <h3>Filtros</h3>
+
+            <label>
+            <input type="checkbox" id="filter-legendary">
+            Solo legendarios
+            </label>
+
+            <div class="menu-actions">
+            <button id="apply-filters">Aplicar filtros</button>
+            <button id="clear-filters">Limpiar</button>
+            </div>
+
+            <hr>
+
+            <button id="toggle-dark">🌙 Modo oscuro</button>
+        </div>
+    </div>
+
     <div class="header">
         <h1>🎮 Pokémon Aleatorio</h1>
-        <button id="theme-toggle" title="Cambiar modo">🌙</button>
     </div>
 
     <div class="pokemon-img">
@@ -111,6 +136,7 @@
 
 <!-- JS externo -->
 <script src="{{ url_for('static', filename='main.js') }}"></script>
+<script src="{{ url_for('static', filename='menu.js') }}"></script>
 
 </body>
 </html>
