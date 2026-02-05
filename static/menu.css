@@ -12,9 +12,13 @@
     height: 36px;
     border-radius: 50%;
     border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
     background: #f2f2f2;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    line-height: 1;
     box-shadow: 0 3px 8px rgba(0,0,0,.25);
 }
 

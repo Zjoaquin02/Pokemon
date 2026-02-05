@@ -15,9 +15,20 @@ document.addEventListener("click", (e) => {
 });
 
 // Dark mode toggle
-toggleDark.addEventListener("click", () => {
-    document.documentElement.classList.toggle("dark");
-});
+const toggleDark = document.getElementById("toggle-dark");
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark");
+}
+
+if (toggleDark) {
+    toggleDark.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+}
+
 
 // ===================== FILTER (LEGENDARY ONLY) =====================
 document.getElementById("apply-filters").addEventListener("click", () => {
