@@ -1,6 +1,8 @@
 
 /* =======================================================
-   POKEMON RANDOMIZER - CLEAN CSS
+   POKEMON RANDOMIZER - CLEAN & ORDERED CSS
+   - Type colors always visible (light & dark)
+   - Improved contrast and readability
 ======================================================= */
 
 /* ===================== VARIABLES ===================== */
@@ -23,7 +25,6 @@ body {
     align-items: center;
     justify-content: center;
     transition: background-color .35s ease;
-    will-change: background-color;
 }
 
 /* ===================== CARD ===================== */
@@ -35,7 +36,6 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.35);
     text-align: center;
     animation: fadeIn 0.6s ease;
-    backface-visibility: hidden;
 }
 
 .card h1 {
@@ -64,7 +64,7 @@ body {
     transform: scale(1.08);
 }
 
-/* ===================== BADGES ===================== */
+/* ===================== BADGES BASE ===================== */
 .badges {
     display: flex;
     justify-content: center;
@@ -75,17 +75,13 @@ body {
 .badge {
     padding: 6px 14px;
     border-radius: 999px;
-    background: #eee;
     font-size: 0.85rem;
-    font-weight: bold;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.35);
 }
 
-/* ===================== INFO ===================== */
-.info {
-    margin: 10px 0;
-    color: #555;
-}
-
+/* ===================== TYPE COLORS ===================== */
 .type-fire { background: #f08030; }
 .type-water { background: #6890f0; }
 .type-grass { background: #78c850; }
@@ -104,6 +100,12 @@ body {
 .type-steel { background: #b8b8d0; color: #000; }
 .type-fairy { background: #ee99ac; color: #000; }
 .type-normal { background: #a8a878; }
+
+/* ===================== INFO ===================== */
+.info {
+    margin: 10px 0;
+    color: #555;
+}
 
 /* ===================== STATS ===================== */
 .stats-box {
@@ -140,18 +142,10 @@ body {
 
 .evo-node {
     margin-bottom: 25px;
-    text-align: center;
 }
 
 .evo-lineal {
     margin: 10px 0;
-}
-
-.evo-children {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
 }
 
 .evo-conditions {
@@ -174,9 +168,8 @@ body {
     border-radius: 10px;
     padding: 10px 16px;
     margin: 6px auto;
-    width: fit-content;
-    font-weight: bold;
     min-width: 120px;
+    font-weight: bold;
     transition: transform 0.15s ease;
 }
 
@@ -201,7 +194,7 @@ body {
     right: 0;
 }
 
-/* ===================== BUTTONS ===================== */
+/* ===================== BUTTON ===================== */
 button {
     margin-top: 15px;
     width: 100%;
@@ -213,33 +206,6 @@ button {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-}
-
-/* ===================== TOGGLE ===================== */
-#theme-toggle {
-    background: #f2f2f2;
-    border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    font-size: 1.1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,.25);
-    transition: background .2s, transform .2s;
-}
-
-#theme-toggle:hover {
-    background: #e0e0e0;
-    transform: scale(1.1);
 }
 
 /* ===================== MODAL ===================== */
@@ -250,7 +216,6 @@ button:hover {
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
 }
 
 #modal-card {
@@ -258,25 +223,15 @@ button:hover {
     padding: 20px;
     border-radius: 16px;
     text-align: center;
-    min-width: 220px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.5);
-    animation: fadeIn .2s ease;
-}
-
-#modal-card img {
-    width: 160px;
 }
 
 /* ===================== DARK MODE ===================== */
 html.dark body {
     background-color: #121212;
-    background-image: none;
-    color: #e0e0e0;
 }
 
 html.dark .card {
     background: #1e1e1e;
-    box-shadow: 0 0 10px #000;
 }
 
 html.dark .pokemon-box,
@@ -286,32 +241,11 @@ html.dark .stat {
     color: #f2f2f2;
 }
 
-html.dark .badge {
+/* IMPORTANT:
+   Do NOT override type colors in dark mode */
+html.dark .badge:not([class*="type-"]) {
     background: #3a3a3a;
     color: #eee;
-}
-
-html.dark .stat-label {
-    color: #bbb;
-}
-
-html.dark .stat-value {
-    color: #fff;
-}
-
-html.dark .cond-label {
-    background: #3b355f;
-    color: #ddd;
-}
-
-html.dark #theme-toggle {
-    background: #333;
-    color: #fff;
-}
-
-html.dark #modal-card {
-    background: #222;
-    color: #fff;
 }
 
 html.dark .name,
@@ -319,37 +253,14 @@ html.dark h1 {
     color: #e6e6e6;
 }
 
-/* ===================== EFFECTS ===================== */
+/* ===================== LEGENDARY EFFECT ===================== */
 .legendary {
-    position: relative;
     color: var(--gold);
     text-shadow: 0 0 6px rgba(212,175,55,.6);
-    animation: legendaryPulse 2.5s ease-in-out infinite;
-}
-
-/* ===================== TRANSITIONS ===================== */
-body,
-.card,
-.pokemon-box,
-.badge,
-.stat,
-.info,
-.name {
-    transition: 
-        background-color .35s ease,
-        color .35s ease,
-        box-shadow .35s ease,
-        border-color .35s ease;
 }
 
 /* ===================== ANIMATIONS ===================== */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes legendaryPulse {
-    0%   { text-shadow: 0 0 6px rgba(212,175,55,.4); transform: scale(1); }
-    50%  { text-shadow: 0 0 14px rgba(212,175,55,.9); transform: scale(1.03); }
-    100% { text-shadow: 0 0 6px rgba(212,175,55,.4); transform: scale(1); }
 }
