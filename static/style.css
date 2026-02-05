@@ -233,3 +233,46 @@ button {
 .pokemon-box:hover {
     transform: translateY(-2px);
 }
+
+/* ---------- Header ---------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ---------- Toggle button ---------- */
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* ---------- Dark mode ---------- */
+body.dark {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+body.dark .card {
+    background: #1e1e1e;
+    box-shadow: 0 0 10px #000;
+}
+
+body.dark .pokemon-box {
+    background: #2a2a2a;
+    color: #fff;
+}
+
+body.dark .stat {
+    background: #2a2a2a;
+}
+
+body.dark .info {
+    color: #ddd;
+}
+
+body.dark a {
+    color: #bbb;
+}
