@@ -1,46 +1,41 @@
-console.log("menu.js cargado");
+document.addEventListener("DOMContentLoaded", () => {
 
-// ===================== MENU LOGIC =====================
-const menuBtn = document.getElementById("menu-btn");
-const sideMenu = document.getElementById("side-menu");
-const toggleDark = document.getElementById("toggle-dark");
+    /* ===================== MENÚ ===================== */
 
-menuBtn.addEventListener("click", () => {
-    sideMenu.classList.toggle("open");
-});
+    const menuBtn   = document.getElementById("menu-btn");
+    const sideMenu  = document.getElementById("side-menu");
+    const toggleDark = document.getElementById("toggle-dark");
 
-document.addEventListener("click", (e) => {
-    if (!sideMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+    if (!menuBtn || !sideMenu) return;
+
+    menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sideMenu.classList.toggle("open");
+    });
+
+    document.addEventListener("click", () => {
         sideMenu.classList.remove("open");
+    });
+
+    sideMenu.addEventListener("click", e => e.stopPropagation());
+
+    /* ===================== DARK MODE ===================== */
+
+    // 1️⃣ Aplicar tema guardado al cargar
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.documentElement.classList.add("dark");
+        toggleDark.textContent = "☀️ Modo claro";
+    } else {
+        toggleDark.textContent = "🌙 Modo oscuro";
     }
-});
 
-// Dark mode toggle
-const toggleDark = document.getElementById("toggle-dark");
-
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "dark") {
-    document.documentElement.classList.add("dark");
-}
-
-if (toggleDark) {
+    // 2️⃣ Toggle + guardar preferencia
     toggleDark.addEventListener("click", () => {
         const isDark = document.documentElement.classList.toggle("dark");
+
         localStorage.setItem("theme", isDark ? "dark" : "light");
+        toggleDark.textContent = isDark ? "☀️ Modo claro" : "🌙 Modo oscuro";
     });
-}
 
-
-// ===================== FILTER (LEGENDARY ONLY) =====================
-document.getElementById("apply-filters").addEventListener("click", () => {
-    const legendary = document.getElementById("filter-legendary").checked;
-    const params = new URLSearchParams();
-
-    if (legendary) params.append("legendary", "1");
-
-    window.location.search = params.toString();
-});
-
-document.getElementById("clear-filters").addEventListener("click", () => {
-    window.location.search = "";
 });
