@@ -59,6 +59,15 @@ python -m pip show flask
 
 python -m pip show pyinstaller
 
+====================
+git checkout main
+git pull origin main
+# trabajo
+git add .
+git commit -m "Cambios desde otra PC"
+git push
+====================
+
 Estructura:
 pokemon_app/
 │
