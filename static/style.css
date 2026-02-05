@@ -363,3 +363,7 @@ body.dark #modal-card {
     background: #222;
     color: #fff;
 }
+
+.evo-click {
+    cursor: pointer;
+}
