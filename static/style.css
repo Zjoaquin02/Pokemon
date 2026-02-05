@@ -404,6 +404,6 @@ body,
         border-color .35s ease;
 }
 
-body {
-    transition: background .4s ease;
+body.dark .name.legendary {
+    filter: drop-shadow(0 0 6px rgba(212,175,55,.9));
 }
