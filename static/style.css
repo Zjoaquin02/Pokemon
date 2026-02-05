@@ -10,7 +10,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color .35s ease;
 }
+
 
 .card {
     background: #ffffff;
@@ -271,9 +273,11 @@ button {
 
 /* ---------- Dark mode ---------- */
 body.dark {
-    background: #121212;
+    background-color: #121212;
+    background-image: none;
     color: #e0e0e0;
 }
+
 
 body.dark .card {
     background: #1e1e1e;
@@ -406,4 +410,8 @@ body,
 
 body.dark .name.legendary {
     filter: drop-shadow(0 0 6px rgba(212,175,55,.9));
+}
+
+body {
+    will-change: background-color;
 }
