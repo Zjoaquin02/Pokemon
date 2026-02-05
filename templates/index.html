@@ -81,6 +81,14 @@
             <div class="evo-lineal">
                 <div class="pokemon-box child evo-click" data-name="{{ evo.to }}">
                     {{ evo.to.capitalize() }}
+
+                    {% if evo.condiciones %}
+                        <div class="evo-conditions">
+                            {% for c in evo.condiciones %}
+                                <div class="condition">{{ c }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

@@ -15,18 +15,38 @@ def describir_condiciones(detalle):
         condiciones.append(f"Nivel {detalle['min_level']}")
 
     if detalle.get("item"):
-        condiciones.append(f"Usando {detalle['item']['name'].replace('-', ' ').title()}")
-
-    if detalle.get("time_of_day"):
-        condiciones.append(f"De {detalle['time_of_day']}")
-
-    if detalle.get("min_happiness"):
-        condiciones.append("Alta felicidad")
+        condiciones.append(
+            f"Usando {detalle['item']['name'].replace('-', ' ').title()}"
+        )
 
     if detalle.get("trigger", {}).get("name") == "trade":
         condiciones.append("Intercambio")
 
+    if detalle.get("min_happiness"):
+        condiciones.append("Alta felicidad")
+
+    if detalle.get("time_of_day"):
+        condiciones.append(
+            f"De {detalle['time_of_day']}"
+        )
+
+    if detalle.get("known_move"):
+        condiciones.append(
+            f"Sabiendo {detalle['known_move']['name'].replace('-', ' ').title()}"
+        )
+
+    if detalle.get("location"):
+        condiciones.append(
+            f"En {detalle['location']['name'].replace('-', ' ').title()}"
+        )
+
+    if detalle.get("held_item"):
+        condiciones.append(
+            f"Sosteniendo {detalle['held_item']['name'].replace('-', ' ').title()}"
+        )
+
     return condiciones
+
 
 def tiene_mega(especie):
     for variedad in especie.get("varieties", []):
