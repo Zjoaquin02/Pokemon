@@ -109,6 +109,9 @@ def index():
 
     especie = obtener_especie(pokemon["species"]["url"])
     generacion = especie["generation"]["name"].replace("-", " ").capitalize()
+    gen_raw = especie["generation"]["name"]   # "generation-vi"
+    gen_romano = gen_raw.split("-")[1].upper()
+    generacion = f"Generación {gen_romano}"
     mega_disponible = tiene_mega(especie)
     es_paradoja = es_pokemon_paradoja(nombre, generacion)
 

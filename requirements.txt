@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 🔹 1. Python / Pip (instalación de dependencias)
 python --version
 
@@ -58,3 +59,7 @@ pip list
 python -m pip show flask
 
 python -m pip show pyinstaller
+=======
+flask
+requests
+>>>>>>> 63e8e38 (Generation Capital letters)
